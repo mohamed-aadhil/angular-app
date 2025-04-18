@@ -1,5 +1,6 @@
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component,Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-time-zone-selector',
@@ -9,15 +10,20 @@ import { Component,Output, EventEmitter } from '@angular/core';
   styleUrl: './time-zone-selector.component.css'
 })
 export class TimeZoneSelectorComponent {
+  
+  @Input() defaultZone: string = 'America/New_York';
   @Output() zoneChange = new EventEmitter<string>();
 
-  timeZones: string[] = [
-    'UTC',
-    'America/New_York',
-    'Europe/London',
-    'Asia/Kolkata',
-    'Asia/Tokyo'
-  ];
+  timeZones: string[] = [];
+
+  ngOnInit() {
+    if ('supportedValuesOf' in Intl && typeof Intl.supportedValuesOf === 'function') {
+      this.timeZones = Intl.supportedValuesOf('timeZone');
+    } else {
+      // Fallback time zones
+      this.timeZones = ['UTC', 'Asia/Kolkata', 'Europe/London'];
+    }
+  }
 
   onZoneChange(event: Event) {
     const selectedZone = (event.target as HTMLSelectElement).value;

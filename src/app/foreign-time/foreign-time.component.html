@@ -1,0 +1,11 @@
+<div class="foreign-clock">
+    <h2>Foreign Time ({{ selectedZone }})</h2>
+    
+    <app-time-zone-selector 
+      [defaultZone]="selectedZone"
+      (zoneChange)="onZoneChange($event)">
+    </app-time-zone-selector>
+  
+    <p class="time">{{ foreignTime }}</p>
+  </div>
+  

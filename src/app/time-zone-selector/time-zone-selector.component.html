@@ -1,5 +1,5 @@
-
-<label for="zone">Choose Time Zone: </label>
-<select id="zone" (change)="onZoneChange($event)">
-  <option *ngFor="let zone of timeZones" [value]="zone">{{ zone }}</option>
+<select id="tz" (change)="onZoneChange($event)">
+  <option *ngFor="let zone of timeZones" [value]="zone" [selected]="zone === defaultZone">
+    {{ zone }}
+  </option>
 </select>

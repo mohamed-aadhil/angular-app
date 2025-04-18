@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./local-time.component.css']
 })
 export class LocalTimeComponent implements OnInit, OnDestroy {
-  @Input() timeZone: string = 'UTC';
   currentTime: string = '';
   private intervalId: any;
 
@@ -21,7 +20,7 @@ export class LocalTimeComponent implements OnInit, OnDestroy {
     // Run outside Angular zone to reduce change detection cycles
     this.ngZone.runOutsideAngular(() => {
       this.intervalId = setInterval(() => {
-        const newTime = new Date().toLocaleTimeString('en-US', { timeZone: this.timeZone });
+        const newTime = new Date().toLocaleTimeString();
 
         // Only run inside Angular zone when updating UI
         this.ngZone.run(() => {
@@ -36,6 +35,6 @@ export class LocalTimeComponent implements OnInit, OnDestroy {
   }
 
   updateTime() {
-    this.currentTime = new Date().toLocaleTimeString('en-US', { timeZone: this.timeZone });
+    this.currentTime = new Date().toLocaleTimeString();
   }
 }

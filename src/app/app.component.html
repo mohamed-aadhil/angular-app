@@ -1,10 +1,12 @@
 <app-header></app-header>
+
 <div style="text-align: center; margin-top: 50px;">
-  <app-time-zone-selector (zoneChange)="onTimeZoneChange($event)"></app-time-zone-selector>
-  <app-local-time [timeZone]="selectedTimeZone"></app-local-time>
+  <!-- Local Time Display -->
+  <app-local-time></app-local-time>
+
+  <hr style="margin: 40px 0;">
+
+  <!-- Foreign Time Display with Time Zone Selector -->
+  <app-foreign-time></app-foreign-time>
 </div>
- 
 
-
-
-  
